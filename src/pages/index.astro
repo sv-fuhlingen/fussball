@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+---
+
+<Layout title="Welcome to Astro.">
+	<header class="bg-header flex items-center justify-center text-white mb-14">
+
+		<div class="text-center">
+			<h1 class="text-6xl font-bold pb-5">
+				Wir suchen dich
+			</h1>
+			<p class="text-mg">
+				Du möchtest Teil eines tollen Teams werden, neue Freunde kennenlernen und eine Menge
+				Spaß haben?
+			</p>
+			<p class="text-mg">
+				Dann trau dich und komm vorbei! Wir freuen uns auf dich
+			</p>
+			<div class="px-14 py-10">
+				<a href="#"
+				   class="md:mr-20 border-2 border-yellow-400 inline-flex w-full justify-center rounded-md px-6 py-4 text-base font-medium text-gray-200 hover:bg-yellow-400 hover:text-gray-800 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">UNSERE
+					JUNGEND</a>
+				<a href="#"
+				   class="mt-2 inline-flex w-full justify-center rounded-md bg-yellow-400 px-6 py-4 text-base font-medium text-gray-800  hover:bg-transparent hover:text-gray-200 border-2 border-yellow-400 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">PROBETRANING</a>
+			</div>
+		</div>
+
+	</header>
+</Layout>
+
+<style>
+
+	.bg-header {
+		background: url(/img/1a.jpg) top center no-repeat;
+		height: 40rem;
+		background-color: hsl(206deg 5% 41%);;
+		background-blend-mode: multiply;
+	}
+
+	.bg-match {
+		background: url(/img/match-bg.jpg) top center no-repeat;
+		background-color: hsl(206deg 5% 41%);;
+		background-blend-mode: multiply;
+	}
+
+	.black-optician {
+		background: rgba(0, 0, 0, 0.6);
+	}
+</style>

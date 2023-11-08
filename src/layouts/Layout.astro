@@ -1,0 +1,87 @@
+---
+interface Props {
+	title: string;
+}
+import Navigation from "../components/navigation.vue";
+import Footer from "../components/footer.vue";
+
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{title}</title>
+	</head>
+	<body>
+		<div class="bg-yellow-400">
+			<div class="mx-auto max-w-7xl px-4 sm:px-6 text-sm lg:px-8 p-2">
+				<p class="left hidden lg:inline">
+					SV Fühlingen-Chorweiler 1929/77 e. V.
+				</p>
+				<p class="text-center lg:hidden">
+					SV Fühlingen-Chorweiler 1929/77 e. V.
+				</p>
+			</div>
+		</div>
+
+		<div class="min-h-full">
+			<Navigation />
+			<slot />
+			<Footer />
+		</div>
+	</body>
+</html>
+<style is:global>
+	:root {
+		--accent: 136, 58, 234;
+		--accent-light: 224, 204, 250;
+		--accent-dark: 49, 10, 101;
+		--accent-gradient: linear-gradient(
+			45deg,
+			rgb(var(--accent)),
+			rgb(var(--accent-light)) 30%,
+			white 60%
+		);
+	}
+	html {
+		font-family: system-ui, sans-serif;
+		background: #13151a;
+		background-size: 224px;
+	}
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+	}
+
+
+
+	.bg-header {
+		background: url(/img/1a.jpg) top center no-repeat;
+		height: 40rem;
+		background-color: hsl(206deg 5% 41%);;
+		background-blend-mode: multiply;
+	}
+
+	.bg-match {
+		background: url(/img/match-bg.jpg) top center no-repeat;
+		background-color: hsl(206deg 5% 41%);;
+		background-blend-mode: multiply;
+	}
+
+	.black-optician {
+		background: rgba(0, 0, 0, 0.6);
+	}
+</style>
