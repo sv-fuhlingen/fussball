@@ -1,0 +1,20 @@
+{
+  "apps": [
+    {
+      "name": "fuhlingen fussball page",
+      "port": "4321",
+      "script": "bun ./dist/server/entry.mjs",
+      "watch": true,
+      "watch_options": {
+        "followSymlinks": false
+      },
+      "autorestart": true,
+      "restart_delay": 4000,
+      "log_date_format": "YYYY-MM-DD HH:mm:ss",
+      "out_file": "/var/log/fuhlingen-fussball-page.log",
+      "error_file": "/var/log/fuhlingen-fussball-page-error.log",
+      "combine_logs": true,
+      "max_memory_restart": "200M"
+    }
+  ]
+}
