@@ -40,6 +40,7 @@ const year = new Date().getFullYear()
           <h3 class="text-base font-medium text-white">Geschäftszeiten</h3>
           <p class="mt-4 text-gray-400">Sie finden uns auf dem Fühlinger Sportplatz zu folgenden Zeiten:</p>
           <p class="mt-4">Donnerstag: 17-19 Uhr</p>
+          <p class="mt-4 text-sm text-gray-400">mitgliederverwaltung@sv-fuehlingen.de</p>
         </div>
 
         <div class="mt-8 pt-4 xl:mt-0 text-gray-200 text-base lg:border-none border-t border-gray-700">

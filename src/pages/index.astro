@@ -1,6 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+
+
+import fetchApi from '../lib/ teamsCache';
+import type Team from '../interfaces/strapi/team';
+
+const teams = await fetchApi.getTeams();
+
+// console.log(teams);
 ---
 
 <Layout title="Welcome to Astro.">
@@ -27,6 +34,10 @@ import Card from '../components/Card.astro';
 		</div>
 
 	</header>
+
+	<main>
+
+	</main>
 </Layout>
 
 <style>

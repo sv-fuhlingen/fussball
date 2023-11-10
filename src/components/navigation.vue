@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import {Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue'
 import {Bars3Icon, BellIcon, XMarkIcon} from '@heroicons/vue/24/outline'
+import fetchApi from "../lib/ teamsCache.ts";
+import TeamsCache from "../lib/ teamsCache.ts";
 
 
 const navigationFooter = {
@@ -11,18 +13,21 @@ const navigationFooter = {
   ],
 }
 
-const TeamsNav =   [
-  {name: 'U12', href: '#'},
-  {name: 'C-Jungend', href: '#'},
-  {name: 'Herren I', href: '#'},
-  {name: 'Herren II', href: '#'},
-  {name: 'Herren III', href: '#'}
-];
 
-let teamsInfo = []
+const teams = await TeamsCache.getTeams();
+
+let teamsInfo = [];
+
+teams.map((team) => (
+    teamsInfo.push({name: team.attributes.name, href: '#'})
+))
+
 
 const navigation = [
   {name: 'Der Verein', href: '#', current: false},
+  {
+    name: 'Teams', href: '#', current: false, data: teamsInfo
+  },
   {name: 'Probetraining', href: '#', current: false},
   {
     name: 'Miglidchaft', href: '#', current: false, data: [
