@@ -1,0 +1,73 @@
+---
+// NewsList.astro
+let news = 0;
+const newsInfo = [
+    {
+        title: 'SV FÜHLINGEN WEIST ROLAND WEST IN DIE SCHRANKEN',
+        desc: 'Roland West wurde der eigenen Favoritenstellung nicht gerecht und verlor bei SV Fühlingen deutlich mit 1:4. Gegen SV Fühlingen setzte es für Roland West eine ungeahnte Pleite. Das Hinspiel war 6:3 zugunsten von Roland West ausgegangen.',
+        img: '../images/FBDE_RT_7_832x468.jpg',
+        img_small: '../images/FBDE_RT_7_432x243.jpg'
+    },
+    {
+        title: 'LAST-MINUTE-REMIS: EGEMEN WIRD ZUM HELD VON SV FÜHLINGEN',
+        desc: 'Das Spiel vom Sonntag zwischen SV Fühlingen und AKM I endete mit einem 3:3-Remis. AKM I zog sich gegen SV Fühlingen achtbar aus der Affäre und erzielte gegen den Favoriten einen Punktgewinn. Im Hinspiel hatte sich AKM I als keine große Hürde erwiesen und mit 1:14 verloren.',
+        img: '../images/FBDE_RT_11_832x468.jpg',
+        img_small: '../images/FBDE_RT_11_432x243.jpg'
+    },
+    {
+        title: 'TORFESTIVAL OHNE SIEGER',
+        desc: 'SC Blau-Weiß Köln kam im Gastspiel bei SV Fühlingen trotz Favoritenrolle nicht über ein 4:4-Remis hinaus. Der vermeintlich leichte Gegner war SV Fühlingen mitnichten. SV Fühlingen kam gegen SC Blau-Weiß Köln zu einem achtbaren Remis.',
+        img: '../images/FBDE_RT_18_832x468.jpg',
+        img_small: '../images/FBDE_RT_18_432x243.jpg'
+    }
+];
+---
+
+<script type="module">
+    let news = 0;
+
+    function changeNews(newsId) {
+        news = newsId;
+        updateDisplay();
+    }
+
+    function updateDisplay() {
+        document.querySelectorAll('.news-item').forEach((el, index) => {
+            el.style.display = news === index ? 'block' : 'none';
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.news-selector').forEach((el, index) => {
+            el.addEventListener('click', () => changeNews(index));
+        });
+        updateDisplay();
+    });
+</script>
+
+<h3 class="title-bg">Mannschafts-News</h3>
+
+<div class="flex flex-wrap overflow-hidden">
+    <div class="md:w-4/6 overflow-hidden">
+        {newsInfo.map((item, index) => (
+                <div class={`border p-4 mr-6 mb-4 news-item ${news === index ? '' : 'hidden'}`}>
+                    <a href="#">
+                        <img src={item.img}/>
+                    </a>
+                    <a class="text-lg block my-4" href="#">{item.title}</a>
+                    <div class="text-sm text-gray-800 leading-6">
+                        {item.desc}
+                    </div>
+                    <!--<a class="mt-4 mb-2 inline-flex w-full justify-center rounded-md bg-black px-4 py-2.5 font-medium text-gray-200 uppercase hover:bg-yellow-400 hover:text-gray-800 sm:w-auto text-sm"href="#">Weiter lesen</a> -->
+                </div>
+            ))}
+    </div>
+
+    <div class="md:w-2/6 overflow-hidden md:text-left sm:text-center sm:w-full">
+        {newsInfo.map((item, index) => (
+                <div class={`rounded-md inline-block sm:mr-4 w-40 p-2 mb-2 border hover:bg-yellow-500 cursor-pointer news-selector ${news === index ? 'bg-yellow-400' : ''}`}>
+                    <img src={item.img_small}/>
+                </div>
+        ))}
+    </div>
+</div>

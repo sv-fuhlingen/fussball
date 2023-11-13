@@ -1,0 +1,74 @@
+---
+import fetchApiFussball from "../../lib/apiFussball";
+import Game from "../../interfaces/apifussball/game";
+
+let prevGames = await fetchApiFussball<Game[]>({
+    id: '00ES8GN91400002IVV0AG08LVUPGND5I',
+    prevGames: true,
+});
+prevGames = prevGames.reverse();
+/**
+ * @type {Game}
+ */
+const firstGames = prevGames[0];
+
+let restGames = prevGames.slice(1);
+restGames.filter(game => game.status === '');
+if(restGames.length > 5) {
+    restGames = restGames.slice(0, 5);
+}
+---
+
+
+<div class="bg-place-1 text-gray-200 rounded-md">
+    <div class="text-center border-b pb-2 z-10">
+        <p class="font-semibold text-xs pb-2 pt-5">{firstGames.ageGroup} | {firstGames.competition}</p>
+        <p class="font-semibold text-xs pb-2">{firstGames.date} | {firstGames.time}</p>
+
+        <div class="flex flex-wrap">
+            <div class="w-2/5">
+                <img
+                        class="inline"
+                        src={firstGames.homeLogo}
+                        alt="">
+                <h4 class="uppercase">{firstGames.homeTeam}</h4>
+            </div>
+            <div class="w-1/5 text-2xl">
+                {firstGames.homeScore} <span class="text-yellow-400">-</span> {firstGames.awayScore}
+            </div>
+            <div class="w-2/5">
+                <img
+                        class="inline"
+                        src={firstGames.awayLogo}
+                        alt="">
+                <h4 class="uppercase">{firstGames.awayTeam}</h4>
+            </div>
+        </div>
+
+    </div>
+    {restGames.map((item, index) => (
+            <div class="text-center border-b py-5">
+                <p class="text-gray-300 font-semibold text-xs pb-2">
+                    <span style="text-transform: uppercase;">{item.date} {item.time}</span> | {item.ageGroup}
+                </p>
+                <div class="flex flex-wrap ">
+                    <div class="w-2/5">
+                        <img class="inline w-5 mr-1"
+                             src={item.homeLogo}
+                        >
+                        {item.homeTeam}
+                    </div>
+                    <div class="w-1/5 text-lg">
+                        {item.homeScore} - {item.awayScore}
+                    </div>
+                    <div class="w-2/5">
+                        <img class="inline w-5 mr-1"
+                             src={item.awayLogo}
+                        >
+                        {item.awayTeam}
+                    </div>
+                </div>
+            </div>
+    ))}
+
+</div>

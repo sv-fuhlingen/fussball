@@ -1,17 +1,35 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import StartpageTeamNews from '../components/home/NewsList.astro';
+import PrevGames from '../components/home/PrevGames.astro';
 
+import fetchApi from '../lib/teamsCache';
+import Game from '../interfaces/apifussball/game';
+import fetchApiFussball from '../lib/apiFussball';
 
-import fetchApi from '../lib/ teamsCache';
-import type Team from '../interfaces/strapi/team';
+import { ChevronRightIcon } from '@heroicons/vue/24/solid';
+
 
 const teams = await fetchApi.getTeams();
 
-// console.log(teams);
+let nextGames = await fetchApiFussball<Game[]>({
+	id: '00ES8GN91400002IVV0AG08LVUPGND5I'
+});
+
+const prevGames = await fetchApiFussball<Game[]>({
+	id: '00ES8GN91400002IVV0AG08LVUPGND5I',
+	prevGames: true,
+});
+
+nextGames.filter(game => game.status === '');
+if(nextGames.length > 6) {
+	nextGames = nextGames.slice(0, 6);
+}
+
 ---
 
-<Layout title="Welcome to Astro.">
-	<header class="bg-header flex items-center justify-center text-white mb-14">
+<Layout title="SV Fühlingen | Fussball">
+	<header class="bg-header flex items-center justify-center text-white">
 
 		<div class="text-center">
 			<h1 class="text-6xl font-bold pb-5">
@@ -35,9 +53,76 @@ const teams = await fetchApi.getTeams();
 
 	</header>
 
-	<main>
 
-	</main>
+	<div class="bg-white shadow mt-10 pt-14 pb-16">
+		<div class="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
+
+			<div class="flex flex-wrap overflow-hidden">
+
+				<!-- News-->
+				<div class="md:w-2/3 overflow-hidden mb-10">
+
+					<StartpageTeamNews/>
+
+				</div>
+
+				<!-- Letzte Spiele-->
+				<div class="md:w-1/3 overflow-hidden w-full">
+					<h3 class="title-bg">Letzte Spiele</h3>
+
+					<PrevGames />
+
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+	<div class="mx-auto max-w-7xl py-10 sm:px-6 lg:px-8">
+
+		<div class="flex flex-wrap">
+			<div class="md:w-2/3 overflow-hidden mb-10 sm:w-max">
+
+				<h3 class="title-bg">Nächste Spiele</h3>
+
+				<div class="bg-match overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg md:mr-20">
+					<table class="min-w-full divide-y divide-gray-300">
+						<tbody>
+
+						{nextGames.map((game, index) => (
+							<tr class={index % 2 === 0 && "black-optician"}>
+								<td class="px-3 py-6 whitespace-nowrap text-gray-200 text-center">{ game.homeTeam }</td>
+								<td class="text-yellow-500 text-center">:</td>
+								<td class="px-3 py-6 text-gray-200 text-center">{ game.awayTeam }</td>
+								<td class="px-3 py-6 text-yellow-500">{ game.date } | { game.time }</td>
+								<td class="px-3 py-6 text-gray-200">{ game.ageGroup }</td>
+							</tr>
+						))}
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="md:w-1/3 overflow-hidden w-full">
+
+				<h3 class="title-bg">Unsere Teams</h3>
+
+				<ul>
+					{teams.map((team) => (
+						<li class="py-1.5 text-gray-900 border-b my-2 font-light hover:text-yellow-500">
+							<ChevronRightIcon class="-translate-y-0.5 w-4 h-4 inline mr-2"/>
+							<div class="inline-block">{ team.attributes.name }</div>
+						</li>
+					))}
+				</ul>
+			</div>
+		</div>
+		<!-- /End replace -->
+	</div>
+
+
 </Layout>
 
 <style>

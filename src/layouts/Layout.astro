@@ -4,7 +4,7 @@ interface Props {
 }
 import Navigation from "../components/navigation.vue";
 import Footer from "../components/footer.vue";
-
+import '../styles/main.css';
 
 const { title } = Astro.props;
 ---
@@ -18,7 +18,7 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<title>{title}</title>
 	</head>
-	<body>
+	<body class="bg-gray-100">
 		<div class="bg-yellow-400">
 			<div class="mx-auto max-w-7xl px-4 sm:px-6 text-sm lg:px-8 p-2">
 				<p class="left hidden lg:inline">
@@ -51,7 +51,6 @@ const { title } = Astro.props;
 	}
 	html {
 		font-family: system-ui, sans-serif;
-		background: #13151a;
 		background-size: 224px;
 	}
 	code {

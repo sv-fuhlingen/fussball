@@ -12,11 +12,8 @@ class TeamsCache {
 
         // Wenn der Cache vorhanden und noch gültig ist
         if (this.cache && now - this.lastFetch < this.cacheDuration) {
-            console.log('cache');
             return this.cache;
         }
-
-        console.log('no cache');
 
         try {
             // Daten von der API abrufen
