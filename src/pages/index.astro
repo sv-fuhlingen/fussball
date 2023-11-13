@@ -16,15 +16,45 @@ let nextGames = await fetchApiFussball<Game[]>({
 	id: '00ES8GN91400002IVV0AG08LVUPGND5I'
 });
 
-const prevGames = await fetchApiFussball<Game[]>({
-	id: '00ES8GN91400002IVV0AG08LVUPGND5I',
-	prevGames: true,
-});
-
 nextGames.filter(game => game.status === '');
 if(nextGames.length > 6) {
 	nextGames = nextGames.slice(0, 6);
 }
+
+const products = [
+	{
+		id: 1,
+		name: 'Du möchtest Fußball spielen?',
+		href: '#',
+		description: 'Freundschaft, Spaß und Spiel – das alles kannst du im Team erleben! Wenn du Fußballer werden möchtest, kannst du gern zu unserem Sichtungstrainig der Jahrgänge U7 – U19 kommen!',
+		imageSrc: 'img/post1.jpg',
+		buttonName: 'Sichtungstrainig'
+	},
+	{
+		id: 2,
+		name: 'Unsere Teams',
+		href: '#',
+		description: 'Alle relevanten Info’s zu unseren Teams findet ihr auf den einzelnen Seiten der Mannschaften: Kader inkl. Trainerstab, aktuelle Tabelle, Statistiken, vergangene sowie zukünftige Spiele.',
+		imageSrc: 'img/post3.jpg',
+		buttonName: 'Teams'
+	},
+	{
+		id: 3,
+		name: 'Jugendtrainer gesucht',
+		href: '#',
+		description: 'Du hast Spaß am Fußball? Du willst junge Fußballer fördern und entwickeln? Dann bist Du bei uns richtig!',
+		imageSrc: 'img/post2.jpg',
+		buttonName: 'Mehr Info'
+	},
+	{
+		id: 4,
+		name: 'Der Verein',
+		href: '#',
+		description: 'Der SV Fühlingen-Chorweiler ist mit über 800 Mitgliedern einer der größten Sportvereine im Kölner Norden.',
+		imageSrc: 'img/post4.jpg',
+		buttonName: 'Über uns'
+	},
+]
 
 ---
 
@@ -122,6 +152,34 @@ if(nextGames.length > 6) {
 		<!-- /End replace -->
 	</div>
 
+	<hr class="mb-16">
+
+	<div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+
+		<div class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-4 lg:gap-x-8">
+			{products.map((product) => (
+				<div class="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
+					<div class="aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none h-56">
+						<img src={product.imageSrc} class="object-cover object-center h-full w-full"/>
+					</div>
+					<div class="flex flex-1 flex-col space-y-2 p-4">
+						<h3 class="text-sm font-medium text-gray-900">
+							<a href={product.href}>
+								<span aria-hidden="true" class="absolute inset-0"/>
+								{ product.name }
+							</a>
+						</h3>
+						<p class="text-sm text-gray-500 leading-6">{ product.description }</p>
+						<div class="flex flex-1 flex-col justify-end">
+							<p class="mt-4 mb-2 inline-flex w-full justify-center rounded-md bg-black px-4 py-2.5 font-medium text-gray-300 uppercase sm:w-auto text-sm">
+								{ product.buttonName }
+							</p>
+						</div>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
 
 </Layout>
 
