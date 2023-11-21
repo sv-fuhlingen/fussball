@@ -1,8 +1,20 @@
 <script setup lang="ts">
 import {Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue'
-import {Bars3Icon, BellIcon, XMarkIcon} from '@heroicons/vue/24/outline'
-import fetchApi from "../lib/teamsCache.ts";
-import TeamsCache from "../lib/teamsCache.ts";
+import {Bars3Icon, XMarkIcon} from '@heroicons/vue/24/outline'
+
+const props = defineProps({
+  url: {
+    type: String,
+    default: ''
+  },
+  teams: {
+    type: Array,
+    default: []
+  }
+});
+
+console.log(props);
+
 
 
 const navigationFooter = {
@@ -14,11 +26,9 @@ const navigationFooter = {
 }
 
 
-const teams = await TeamsCache.getTeams();
-
 let teamsInfo = [];
 
-teams.map((team) => (
+props.teams.map((team) => (
     teamsInfo.push({name: team.attributes.name, href: '#'})
 ))
 
@@ -28,7 +38,7 @@ const navigation = [
   {
     name: 'Teams', href: '#', current: false, data: teamsInfo
   },
-  {name: 'Probetraining', href: '#', current: false},
+  {name: 'Probetraining', href: '/probetraning', current: false},
   {
     name: 'Miglidchaft', href: '#', current: false, data: [
       {name: 'Probetraing', href: '#'},
@@ -39,6 +49,13 @@ const navigation = [
   {name: 'Sponsorng', href: '#', current: false},
 ]
 
+for (const item of navigation) {
+  if (item.href === props.url) {
+    item.current = true
+  }
+}
+
+
 </script>
 <template>
 <Disclosure as="nav" class="bg-black" v-slot="{ open }">
@@ -47,7 +64,9 @@ const navigation = [
   <div class="flex h-16 items-center justify-between">
     <div class="flex items-center">
       <div class="flex-shrink-5 ">
-        <img class="w-12 mt-6" src="/img/logo.png" alt="SV Fühlingen Logo">
+        <a href="/">
+          <img class="w-12 mt-6" src="/img/logo.png" alt="SV Fühlingen Logo">
+        </a>
       </div>
       <div class="hidden lg:block">
         <div class="ml-12 flex items-baseline space-x-4">

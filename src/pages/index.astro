@@ -25,7 +25,7 @@ const products = [
 	{
 		id: 1,
 		name: 'Du möchtest Fußball spielen?',
-		href: '#',
+		href: '/probetraning',
 		description: 'Freundschaft, Spaß und Spiel – das alles kannst du im Team erleben! Wenn du Fußballer werden möchtest, kannst du gern zu unserem Sichtungstrainig der Jahrgänge U7 – U19 kommen!',
 		imageSrc: 'img/post1.jpg',
 		buttonName: 'Sichtungstrainig'
@@ -121,7 +121,7 @@ const products = [
 						<tbody>
 
 						{nextGames.map((game, index) => (
-							<tr class={index % 2 === 0 && "black-optician"}>
+							<tr class={index % 2 === 0 ? "black-optician" : ""}>
 								<td class="px-3 py-6 whitespace-nowrap text-gray-200 text-center">{ game.homeTeam }</td>
 								<td class="text-yellow-500 text-center">:</td>
 								<td class="px-3 py-6 text-gray-200 text-center">{ game.awayTeam }</td>

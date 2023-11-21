@@ -6,5 +6,6 @@ export default interface Team {
         ident: string;
         fussballde_id: string;
         prio: number;
+        jahrgang: string;
     };
 }

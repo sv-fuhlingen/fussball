@@ -1,0 +1,89 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import fetchApi from '../../lib/teamsCache';
+import StartpageTeamNews from "../../components/home/NewsList.astro";
+import PrevGames from "../../components/home/PrevGames.astro";
+let { ident } = Astro.params;
+
+ident = ident.toLowerCase();
+
+const teams = await fetchApi.getTeams();
+const team = teams.find(team => team.attributes.ident.toLowerCase() === ident);
+
+const title = `${team.attributes.ident} - ${team.attributes.name} - SV Fühlingen`;
+
+const jobOpenings = [
+    {
+        id: 1,
+        role: 'Full-time designer',
+        href: '#',
+        description:
+            'Quos sunt ad dolore ullam qui. Enim et quisquam dicta molestias. Corrupti quo voluptatum eligendi autem labore.',
+        salary: '$75,000 USD',
+        location: 'San Francisco, CA',
+    },
+    {
+        id: 2,
+        role: 'Laravel developer',
+        href: '#',
+        description:
+            'Et veniam et officia dolorum rerum. Et voluptas consequatur magni sapiente amet voluptates dolorum. Ut porro aut eveniet.',
+        salary: '$125,000 USD',
+        location: 'San Francisco, CA',
+    },
+    {
+        id: 3,
+        role: 'React Native developer',
+        href: '#',
+        description:
+            'Veniam ipsam nisi quas architecto eos non voluptatem in nemo. Est occaecati nihil omnis delectus illum est.',
+        salary: '$105,000 USD',
+        location: 'San Francisco, CA',
+    },
+]
+
+---
+
+<Layout title={title}>
+
+
+    <div class="bg-gray-50 shadow pt-14 pb-16 text-gray-500">
+        <div class="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
+
+            <div class="text-center">
+                <h1 class="text-4xl font-bold tracking-tight text-gray-900">{team.attributes.name}</h1>
+                <p class="mt-4 text-xl">Jahrgang: </p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
+
+        <div class="flex flex-wrap overflow-hidden mt-10">
+
+            <!-- News-->
+            <div class="md:w-2/5 overflow-hidden">
+
+                <img src="https://placehold.co/600x400">
+
+            </div>
+
+            <!-- Letzte Spiele-->
+            <div class="md:w-3/5 overflow-hidden md:p-5">
+
+
+                dasds
+
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+
+
+</Layout>
