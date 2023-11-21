@@ -12,25 +12,24 @@ class TeamsCache {
 
         // Wenn der Cache vorhanden und noch gültig ist
         if (this.cache && now - this.lastFetch < this.cacheDuration) {
+            console.log('cache');
             return this.cache;
         }
 
         try {
             // Daten von der API abrufen
+            console.log('call api');
+
             const teams = await fetchApi<Team[]>({
-                endpoint: 'teams?sort=prio',
+                endpoint: 'teams?sort=prio&populate[]=image&populate[]=trainers',
                 wrappedByKey: 'data',
             });
 
-            // Überprüfen, ob die Antwort mindestens ein Team enthält
             if (teams.length > 0) {
-                // Cache aktualisieren
                 this.cache = teams;
                 this.lastFetch = now;
-            } else if (this.cache) {
-                // Wenn keine Teams zurückgegeben werden, aber ein Cache vorhanden ist
-                return this.cache;
             }
+            return this.cache;
         } catch (error) {
             console.error("Fehler beim Abrufen der Teams:", error);
             // Bei einem Fehler den alten Cache zurückgeben, falls vorhanden

@@ -13,10 +13,6 @@ const props = defineProps({
   }
 });
 
-console.log(props);
-
-
-
 const navigationFooter = {
   social: [
     {
