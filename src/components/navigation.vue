@@ -32,19 +32,10 @@ console.log(teamsInfo);
 
 
 const navigation = [
-  {name: 'Der Verein', href: '#', current: false},
   {
-    name: 'Teams', href: '#', current: false, data: teamsInfo
+    name: 'Teams', href: '/team', current: false, data: teamsInfo
   },
-  {name: 'Probetraining', href: '/probetraning', current: false},
-  {
-    name: 'Miglidchaft', href: '#', current: false, data: [
-      {name: 'Probetraing', href: '#'},
-      {name: 'Kundigung', href: '#'},
-    ]
-  },
-  {name: 'Kontakt', href: '#', current: false},
-  {name: 'Sponsorng', href: '#', current: false},
+  {name: 'Probetraining', href: '/probetraning', current: false}
 ]
 
 for (const item of navigation) {
