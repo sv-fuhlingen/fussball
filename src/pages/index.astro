@@ -76,7 +76,7 @@ const products = [
 				<a href="#"
 				   class="md:mr-20 border-2 border-yellow-400 inline-flex w-full justify-center rounded-md px-6 py-4 text-base font-medium text-gray-200 hover:bg-yellow-400 hover:text-gray-800 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">UNSERE
 					JUNGEND</a>
-				<a href="#"
+				<a href="/probetraning"
 				   class="mt-2 inline-flex w-full justify-center rounded-md bg-yellow-400 px-6 py-4 text-base font-medium text-gray-800  hover:bg-transparent hover:text-gray-200 border-2 border-yellow-400 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">PROBETRANING</a>
 			</div>
 		</div>
@@ -143,7 +143,7 @@ const products = [
 					{teams.map((team) => (
 						<li class="py-1.5 text-gray-900 border-b my-2 font-light hover:text-yellow-500">
 							<ChevronRightIcon class="-translate-y-0.5 w-4 h-4 inline mr-2"/>
-							<div class="inline-block">{ team.attributes.name }</div>
+							<a href=`/team/${team.attributes.ident}` class="inline-block">{ team.attributes.name }</a>
 						</li>
 					))}
 				</ul>
@@ -188,17 +188,10 @@ const products = [
 	.bg-header {
 		background: url(/img/1a.jpg) top center no-repeat;
 		height: 40rem;
-		background-color: hsl(206deg 5% 41%);;
-		background-blend-mode: multiply;
+		background-size: cover;
+		background-color: black;
+
 	}
 
-	.bg-match {
-		background: url(/img/match-bg.jpg) top center no-repeat;
-		background-color: hsl(206deg 5% 41%);;
-		background-blend-mode: multiply;
-	}
 
-	.black-optician {
-		background: rgba(0, 0, 0, 0.6);
-	}
 </style>

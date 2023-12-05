@@ -25,8 +25,10 @@ const navigationFooter = {
 let teamsInfo = [];
 
 props.teams.map((team) => (
-    teamsInfo.push({name: team.attributes.name, href: '#'})
+    teamsInfo.push({name: team.attributes.name, href: '/team/' + team.attributes.ident})
 ))
+
+console.log(teamsInfo);
 
 
 const navigation = [
@@ -96,7 +98,7 @@ for (const item of navigation) {
                     class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-black shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                   <div class="py-1">
                     <MenuItem v-for="(data, index) in item.data" v-slot="{ active }">
-                      <a href="#"
+                      <a :href="data.href"
                          :class="[
                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-300',
                                    index != 0 ? 'border-t border-t-gray-800' : '',

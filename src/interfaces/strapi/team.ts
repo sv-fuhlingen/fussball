@@ -8,36 +8,37 @@ export default interface Team {
         prio: number;
         jahrgang: string | null;
         image?: {
-            data: {
-                id: number;
-                attributes: {
-                    name: string;
-                    alternativeText: string | null;
-                    caption: string | null;
-                    width: number;
-                    height: number;
-                    formats: {
-                        thumbnail: ImageFormat;
-                        small: ImageFormat;
-                        medium: ImageFormat;
-                        large: ImageFormat;
-                    };
-                    hash: string;
-                    ext: string;
-                    mime: string;
-                    size: number;
-                    url: string;
-                    previewUrl: string | null;
-                    provider: string;
-                    provider_metadata: null;
-                    createdAt: string;
-                    updatedAt: string;
-                };
-            };
+            data: Image | null;
         };
         trainers?: {
             data: Trainer[];
         };
+    };
+}
+interface Image {
+    id: number;
+    attributes: {
+        name: string;
+        alternativeText: string | null;
+        caption: string | null;
+        width: number;
+        height: number;
+        formats: {
+            thumbnail: ImageFormat;
+            small: ImageFormat;
+            medium: ImageFormat;
+            large: ImageFormat;
+        };
+        hash: string;
+        ext: string;
+        mime: string;
+        size: number;
+        url: string;
+        previewUrl: string | null;
+        provider: string;
+        provider_metadata: null;
+        createdAt: string;
+        updatedAt: string;
     };
 }
 
@@ -53,14 +54,19 @@ interface ImageFormat {
     url: string;
 }
 
-interface Trainer {
+export interface Trainer {
     id: number;
     attributes: {
         name: string;
         telefon: string | null;
         eintrittsdatum: string;
+        formatEintrittsdatum: string | null;
+        img: string | null;
         lizenz: string | null;
         createdAt: string;
         updatedAt: string;
+        image?: {
+            data: Image | null;
+        };
     };
 }
