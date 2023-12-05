@@ -29,7 +29,7 @@ if (team.attributes.image.data) {
 }
 
 
-let trainersCache : Trainer[] | null = await TrainerCache.getTrainers();
+let trainersCache: Trainer[] | null = await TrainerCache.getTrainers();
 let trainers = [];
 
 trainers = trainersCache.filter(trainer => trainerId.includes(trainer.id));
@@ -83,18 +83,6 @@ for (const competition in competitionCount) {
 }
 
 prevGames = prevGames.filter(game => game.status === '');
-
-const people = [
-    {
-        name: 'Lindsay Walton',
-        role: 'Front-end Developer',
-        imageUrl:
-            'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-        twitterUrl: '#',
-        linkedinUrl: '#',
-    },
-    // More people...
-]
 ---
 <style>
 
@@ -128,28 +116,33 @@ const people = [
             )}
 
             <!-- Letzte Spiele-->
-            <div class="md:w-3/5 sm:w-full sm:mt-5 md:mt-0 overflow-hidden md:pl-5">
+            <div class="md:w-3/5 sm:w-full mt-5 md:mt-0 overflow-hidden md:pl-5">
 
 
                 <h3 class="text-2xl font-bold mb-4">Trainingszeiten:</h3>
                 <p>
                     {team.attributes.desc.split('\n').map((item, key) => {
                         return <span key={key}>{item}<br/></span>
-                    })
+                    })}
                 </p>
                 <hr class="mt-4">
 
-                <p class="text-base font-bold text-gray-500 mb-2 mt-4">Tabellenplatz: <span class="font-normal text-black">{tableInfo.place}</span></p>
-                <p class="text-base font-bold text-gray-500 mb-2">Punkte: <span class="font-normal text-black">{tableInfo.points}</span></p>
-                <p class="text-base font-bold text-gray-500 mb-2">Torverhältnis: <span class="font-normal text-black">{tableInfo.goal}</span></p>
-                <p class="text-base font-bold text-gray-500">Spielklasse: <span class="font-normal text-black">{mostCommonCompetition}</span></p>
+                <p class="text-base font-bold text-gray-500 mb-2 mt-4">Tabellenplatz: <span
+                        class="font-normal text-black">{tableInfo.place}</span></p>
+                <p class="text-base font-bold text-gray-500 mb-2">Punkte: <span
+                        class="font-normal text-black">{tableInfo.points}</span></p>
+                <p class="text-base font-bold text-gray-500 mb-2">Torverhältnis: <span
+                        class="font-normal text-black">{tableInfo.goal}</span></p>
+                <p class="text-base font-bold text-gray-500">Spielklasse: <span
+                        class="font-normal text-black">{mostCommonCompetition}</span></p>
 
                 <hr class="mt-4">
 
                 <h3 class="text-base font-bold mt-4 mb-4">Nächste spiel:</h3>
 
                 <div class="text-center pb-2 ">
-                    <p class="font-semibold text-xs pb-2">{firstGames.date} {firstGames.time} | {firstGames.competition}</p>
+                    <p class="font-semibold text-xs pb-2">{firstGames.date} {firstGames.time}
+                        | {firstGames.competition}</p>
                     <div class="flex flex-wrap">
                         <div class="w-2/5">
                             <img
@@ -171,11 +164,11 @@ const people = [
                     </div>
 
                 </div>
-                        </div>
-
             </div>
+
         </div>
     </div>
+
 
     <div class="border-t-2 border-gray-200 mt-8 mb-16 mx-auto max-w-7xl px-6 lg:px-8 flex flex-wrap">
 
@@ -189,9 +182,9 @@ const people = [
 
                     {prevGames.map((game, index) => (
                             <tr class={index % 2 === 0 ? "black-optician" : ""}>
-                                <td class="px-3 py-6 whitespace-nowrap text-gray-200 text-center">{ game.homeTeam }</td>
+                                <td class="px-3 py-6 whitespace-nowrap text-gray-200 text-center">{game.homeTeam}</td>
                                 <td class="text-yellow-500 text-center">{game.homeScore} : {game.awayScore}</td>
-                                <td class="px-3 py-6 text-gray-200 text-center">{ game.awayTeam }</td>
+                                <td class="px-3 py-6 text-gray-200 text-center">{game.awayTeam}</td>
                             </tr>
                     ))}
 
@@ -206,24 +199,26 @@ const people = [
                 {trainers.map((trainer, index) => (
 
 
-                <li class="flex flex-col gap-10 pt-12 sm:flex-row">
-                    {trainer.attributes.img && <img class="aspect-[4/5] w-52 flex-none rounded-2xl object-cover" src={ trainer.attributes.img } alt=""> }
-                    <div class="max-w-xl flex-auto">
-                        <h3 class="text-lg font-semibold leading-8 tracking-tight text-gray-900">{ trainer.attributes.name}</h3>
-                        {trainer.attributes.lizenz && <p class="text-base leading-7 text-gray-500">{ trainer.attributes.lizenz}</p> }
+                    <li class="flex flex-col gap-10 pt-12 sm:flex-row">
+                        {trainer.attributes.img && <img class="aspect-[4/5] w-52 flex-none rounded-2xl object-cover"
+                                                        src={trainer.attributes.img} alt="">}
+                        <div class="max-w-xl flex-auto">
+                            <h3 class="text-lg font-semibold leading-8 tracking-tight text-gray-900">{trainer.attributes.name}</h3>
+                            {trainer.attributes.lizenz &&
+                                    <p class="text-base leading-7 text-gray-500">{trainer.attributes.lizenz}</p>}
 
-                        <p class="mt-6 text-base leading-7 text-gray-600">
-                            <span class="text-gray-500">Seit: </span> { trainer.attributes.formatEintrittsdatum}
-                        </p>
-                        {trainer.attributes.telefon &&
-                            <p class="mt-2 text-base leading-7 text-gray-600 font-bold">
-                                <span class="text-gray-500 font-normal">Telefon: </span> { trainer.attributes.telefon}
+                            <p class="mt-6 text-base leading-7 text-gray-600">
+                                <span class="text-gray-500">Seit: </span> {trainer.attributes.formatEintrittsdatum}
                             </p>
-                        }
-                    </div>
-                </li>
-                    ))}
-                <!-- More people... -->
+                            {
+                                trainer.attributes.telefon &&
+                                        <p class="mt-2 text-base leading-7 text-gray-600 font-bold">
+                                            <span class="text-gray-500 font-normal">Telefon: </span> {trainer.attributes.telefon}
+                                        </p>
+                            }
+                        </div>
+                    </li>
+                ))}
             </ul>
 
         </div>

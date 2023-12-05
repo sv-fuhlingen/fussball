@@ -125,8 +125,8 @@ const products = [
 								<td class="px-3 py-6 whitespace-nowrap text-gray-200 text-center">{ game.homeTeam }</td>
 								<td class="text-yellow-500 text-center">:</td>
 								<td class="px-3 py-6 text-gray-200 text-center">{ game.awayTeam }</td>
-								<td class="px-3 py-6 text-yellow-500">{ game.date } | { game.time }</td>
-								<td class="px-3 py-6 text-gray-200">{ game.ageGroup }</td>
+								<td class="px-3 py-6 text-yellow-500">{ game.date } <span class="hidden lg:inline-block ml-1"> | { game.time }</span></td>
+								<td class="hidden lg:block px-3 py-6 text-gray-200">{ game.ageGroup }</td>
 							</tr>
 						))}
 
