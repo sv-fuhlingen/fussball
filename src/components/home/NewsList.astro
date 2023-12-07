@@ -26,14 +26,14 @@ const newsInfo = [
 <script type="module">
     let news = 0;
 
-    function changeNews(newsId) {
+    function changeNews(newsId: number) {
         news = newsId;
         updateDisplay();
     }
 
     function updateDisplay() {
-        document.querySelectorAll('.news-item').forEach((el, index) => {
-            el.style.display = news === index ? 'block' : 'none';
+        document.querySelectorAll('.news-item').forEach((el: Element, index) => {
+            (el as HTMLElement).style.display = news === index ? 'block' : 'none';
         });
     }
 
