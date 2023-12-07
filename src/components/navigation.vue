@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue'
-import {Bars3Icon, XMarkIcon} from '@heroicons/vue/24/outline'
+import {Bars3Icon, XMarkIcon, ChevronDownIcon } from '@heroicons/vue/24/outline'
 
 const props = defineProps({
   url: {
@@ -28,19 +28,30 @@ props.teams.map((team) => (
     teamsInfo.push({name: team.attributes.name, href: '/team/' + team.attributes.ident})
 ))
 
-console.log(teamsInfo);
-
 
 const navigation = [
   {
-    name: 'Teams', href: '/team', current: false, data: teamsInfo
+    name: 'Teams', href: '#', current: false, data: teamsInfo
   },
-  {name: 'Probetraining', href: '/probetraning', current: false}
+  {name: 'Probetraining', href: '/probetraning', current: false},
+  {
+    name: 'Mitgliedschaft', href: '#', current: false, data: [
+      {name: 'Anmeldung', href: '/anmeldung'},
+    ]
+  },
 ]
 
 for (const item of navigation) {
   if (item.href === props.url) {
     item.current = true
+  }
+  if(item.data) {
+    for (const subitem of item.data) {
+      if (subitem.href === props.url) {
+        subitem.current = true
+        item.current = true
+      }
+    }
   }
 }
 
@@ -93,7 +104,8 @@ for (const item of navigation) {
                          :class="[
                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-300',
                                    index != 0 ? 'border-t border-t-gray-800' : '',
-                                   'text-gray-100 block px-4 py-2 text-sm hover:bg-black hover:text-yellow-500'
+                                   'text-gray-100 block px-4 py-2 text-sm hover:bg-black hover:text-yellow-500',
+                                   data.current ? 'bg-gray-900 text-yellow-400 cursor-default' : '',
                                    ]">{{
                           data.name
                         }}</a>
@@ -121,10 +133,21 @@ for (const item of navigation) {
 
 <DisclosurePanel class="lg:hidden">
   <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
-    <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.href"
+    <template v-for="item in navigation" :key="item.name">
+      <DisclosureButton v-if="!item.data" as="a" :href="item.href"
                       :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']"
                       :aria-current="item.current ? 'page' : undefined">{{ item.name }}
-    </DisclosureButton>
+      </DisclosureButton>
+      <p class='block px-3 py-2 rounded-md text-base font-medium text-gray-400' v-show="item.data">
+        {{ item.name }}
+        <ChevronDownIcon class="inline h-5 w-5" aria-hidden="true"/>
+      </p>
+      <DisclosureButton v-for="subitem in item.data" as="a" :href="subitem.href"
+                        :class="[subitem.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block ml-5 px-3 py-2 rounded-md text-base font-medium']"
+                        :aria-current="subitem.current ? 'page' : undefined">{{ subitem.name }}
+      </DisclosureButton>
+
+    </template>
   </div>
 </DisclosurePanel>
 </Disclosure>
