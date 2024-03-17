@@ -46,43 +46,44 @@ trainers = trainers.map(trainer => {
     return trainer;
 });
 
-// Für den Gesamtdatensatz
-const footballData: FootballJson = await fetchApiFussballTeam<FootballJson>({
-    id: team.attributes.fussballde_id,
-});
-//
-
-const tableData: Table[] = footballData.table;
-
-const tableInfo: Table = tableData.find(table => table.team.includes('Fühlingen'));
-
-
-
-let prevGames: Game[] = footballData.prevGames;
-const nextGames: Game[] = footballData.nextGames;
-
-const firstGames: Game = nextGames[0];
-
-
-const combinedGames = [...prevGames, ...nextGames];
-
-// Zählen, wie oft jede competition vorkommt
-const competitionCount = combinedGames.reduce((acc, game) => {
-    acc[game.competition] = (acc[game.competition] || 0) + 1;
-    return acc;
-}, {});
-
-// Ermitteln der häufigsten competition
+let tableInfo: Table|{} = {};
 let mostCommonCompetition = '';
 let maxCount = 0;
-for (const competition in competitionCount) {
-    if (competitionCount[competition] > maxCount) {
-        mostCommonCompetition = competition;
-        maxCount = competitionCount[competition];
-    }
-}
+let firstGames: Game|{} = {};
+let prevGames: Game[] = [];
+if (team.attributes.fussballde_id) {
 
-prevGames = prevGames.filter(game => game.status === '');
+    const footballData: FootballJson = await fetchApiFussballTeam<FootballJson>({
+        id: team.attributes.fussballde_id,
+    });
+
+    const tableData: Table[] = footballData.table;
+
+    const tableInfo: Table = tableData.find(table => table.team.includes('Fühlingen'));
+
+
+    prevGames = footballData.prevGames;
+    const nextGames: Game[] = footballData.nextGames;
+
+    firstGames = nextGames[0];
+
+    const combinedGames = [...prevGames, ...nextGames];
+
+    const competitionCount = combinedGames.reduce((acc, game) => {
+        acc[game.competition] = (acc[game.competition] || 0) + 1;
+        return acc;
+    }, {});
+
+    for (const competition in competitionCount) {
+        if (competitionCount[competition] > maxCount) {
+            mostCommonCompetition = competition;
+            maxCount = competitionCount[competition];
+        }
+    }
+
+    prevGames = prevGames.filter(game => game.status === '');
+
+}
 ---
 <style>
 
@@ -125,6 +126,8 @@ prevGames = prevGames.filter(game => game.status === '');
                         return <span key={key}>{item}<br/></span>
                     })}
                 </p>
+
+                {team.attributes.fussballde_id  && (
                 <hr class="mt-4">
 
                 <p class="text-base font-bold text-gray-500 mb-2 mt-4">Tabellenplatz: <span
@@ -164,6 +167,7 @@ prevGames = prevGames.filter(game => game.status === '');
                     </div>
 
                 </div>
+                )}
             </div>
 
         </div>
@@ -172,6 +176,7 @@ prevGames = prevGames.filter(game => game.status === '');
 
     <div class="border-t-2 border-gray-200 mt-8 mb-16 mx-auto max-w-7xl px-6 lg:px-8 flex flex-wrap">
 
+        {team.attributes.fussballde_id  && (
         <div class="md:w-3/5 sm:w-full overflow-hidden">
 
             <h3 class="text-2xl font-bold mb-8 mt-8">Letzte Spiele:</h3>
@@ -192,6 +197,7 @@ prevGames = prevGames.filter(game => game.status === '');
                 </table>
             </div>
         </div>
+        )}
         <div class="md:w-2/5 sm:w-full sm:mt-5 md:mt-0 overflow-hidden md:pl-5">
             <h3 class="text-2xl font-bold mb-8 mt-8">Trainer:</h3>
 
@@ -199,29 +205,29 @@ prevGames = prevGames.filter(game => game.status === '');
                 {trainers.map((trainer, index) => (
 
 
-                    <li class="flex flex-col gap-10 pt-12 sm:flex-row">
-                        {trainer.attributes.img && <img class="aspect-[4/5] w-52 flex-none rounded-2xl object-cover"
-                                                        src={trainer.attributes.img} alt="">}
-                        <div class="max-w-xl flex-auto">
-                            <h3 class="text-lg font-semibold leading-8 tracking-tight text-gray-900">{trainer.attributes.name}</h3>
-                            {trainer.attributes.lizenz &&
-                                    <p class="text-base leading-7 text-gray-500">{trainer.attributes.lizenz}</p>}
+                        <li class="flex flex-col gap-10 pt-12 sm:flex-row">
+                            {trainer.attributes.img && <img class="aspect-[4/5] w-52 flex-none rounded-2xl object-cover"
+                                                            src={trainer.attributes.img} alt="">}
+                            <div class="max-w-xl flex-auto">
+                                <h3 class="text-lg font-semibold leading-8 tracking-tight text-gray-900">{trainer.attributes.name}</h3>
+                                {trainer.attributes.lizenz &&
+                                        <p class="text-base leading-7 text-gray-500">{trainer.attributes.lizenz}</p>}
 
-                            <p class="mt-6 text-base leading-7 text-gray-600">
-                                <span class="text-gray-500">Seit: </span> {trainer.attributes.formatEintrittsdatum}
-                            </p>
-                            {
-                                trainer.attributes.telefon &&
+                                <p class="mt-6 text-base leading-7 text-gray-600">
+                                    <span class="text-gray-500">Seit: </span> {trainer.attributes.formatEintrittsdatum}
+                                </p>
+                                {
+                                    trainer.attributes.telefon &&
                                         <p class="mt-2 text-base leading-7 text-gray-600 font-bold">
                                             <span class="text-gray-500 font-normal">Telefon: </span> {trainer.attributes.telefon}
                                         </p>
-                            }
-                        </div>
-                    </li>
-                ))}
-            </ul>
+                                }
+                            </div>
+                        </li>
+                    ))}
+                    </ul>
 
-        </div>
-    </div>
+                    </div>
+                    </div>
 
-</Layout>
+                    </Layout>
