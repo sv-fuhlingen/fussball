@@ -73,7 +73,7 @@ if (team.attributes.fussballde_id) {
 
     const tableData: Table[] = footballData.table;
 
-    const tableInfo: Table = tableData.find(table => table.team.includes('Fühlingen'));
+    tableInfo = tableData.find(table => table.team.includes('Fühlingen'));
 
 
     prevGames = footballData.prevGames;
