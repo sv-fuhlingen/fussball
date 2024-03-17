@@ -46,7 +46,21 @@ trainers = trainers.map(trainer => {
     return trainer;
 });
 
-let tableInfo: Table|{} = {};
+let tableInfo: Table = {
+    place: 0,
+    team: "",
+    img: "",
+    games: 0,
+    won: 0,
+    draw: 0,
+    lost: 0,
+    goal: "",
+    goalDifference: 0,
+    points: 0,
+    isRelegation: false,
+    isPromotion: false,
+};
+
 let mostCommonCompetition = '';
 let maxCount = 0;
 let firstGames: Game|{} = {};
