@@ -7,13 +7,15 @@ let prevGames = await fetchApiFussball<Game[]>({
     prevGames: true,
 });
 prevGames = prevGames.reverse();
+prevGames = prevGames.filter(game => game.status === '');
 /**
  * @type {Game}
  */
 const firstGames = prevGames[0];
 
 let restGames = prevGames.slice(1);
-restGames = restGames.filter(game => game.status === '');
+
+
 if(restGames.length > 5) {
     restGames = restGames.slice(0, 5);
 }
