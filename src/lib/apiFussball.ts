@@ -25,16 +25,24 @@ export default async function fetchApiFussball<T>({
         'x-auth-token': import.meta.env.FUSSBALL_DE_AUTH_TOKEN,
     });
 
-    const res = await fetch(url.toString(), { headers });
-    let data = await res.json();
+    console.log(url.toString());
+
+    try {
+        const res = await fetch(url.toString(), { headers });
+        let data = await res.json();
 
 
-    data = data['data'];
+        data = data['data'];
 
 
-    if (wrappedByList) {
-        data = data[0];
+        if (wrappedByList) {
+            data = data[0];
+        }
+
+        return data as T;
+    } catch (error) {
+        console.error("Fehler beim Abrufen der Teams:", error);
+        return [];
     }
 
-    return data as T;
 }
