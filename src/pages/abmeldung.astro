@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+import {DocumentArrowDownIcon} from '@heroicons/vue/24/solid';
+
+---
+
+<Layout title="Abmeldung beim SV Fühlingen">
+
+    <div class="bg-gray-50 shadow pt-14 pb-8 text-gray-500">
+
+        <div class="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
+
+            <div class="pb-2">
+                <h1 class="text-2xl font-bold tracking-tight text-gray-900">Abmeldung vom Verein</h1>
+                <p class="mt-4 text-xl">Liebe Fußballfreunde,</p>
+                <p class="mt-2 text-xl">wenn Du Dich dazu entschieden hast, unseren Verein zu verlassen, findest Du hier alle notwendigen Informationen zum Abmeldeprozess sowie zu den geltenden Sperr- und Wechselbestimmungen.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
+
+        <p class="mt-10 ">
+            Abmeldeformular:
+            Das Abmeldeformular findest Du hier:
+        </p>
+        <a target="_blank" href="/download/Abmeldung-fuhlingen.pdf" class="mt-5 mb-3 inline-flex items-center gap-x-2 rounded-md bg-gray-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
+            <DocumentArrowDownIcon class="-ml-0.5 h-5 w-5" />
+            Abmeldeformular
+        </a>
+
+        <p class="mt-2">
+            Du kannst es entweder per Post senden oder per E-Mail.
+        </p>
+        <h3 class="mt-8 font-bold leading-10 tracking-tight text-gray-900">Schriftliche oder E-Mail Abmeldung:</h3>
+        <p>
+            Die Abmeldung muss schriftlich erfolgen. Du kannst dies entweder per Einschreiben-Postkarte oder per E-Mail an <span class="text-gray-500 underline">mitgliederverwaltung@sv-fuehlingen.de</span> tun. Entscheidend für die Abmeldung ist das Datum des Poststempels.
+        </p>
+        <h3 class="mt-8 font-bold leading-10 tracking-tight text-gray-900">Sperrzeiten:</h3>
+        <p>
+            Wenn Du Dich außerhalb der Wechselperioden abmeldest, erhältst Du automatisch eine Sperre von 3 Monaten durch den Verband,
+            und der Verein kann zusätzlich noch 3 Monate hinzufügen. Damit das klar ist:
+            Wenn Du während der laufenden Saison außerhalb der Wechselperioden wechselst,
+            bekommst Du eine Sperre von 3 bis 6 Monaten.
+        </p>
+        <h3 class="mt-8 font-bold leading-10 tracking-tight text-gray-500">Wechselperioden Herren:</h3>
+        <p>
+            Transferperiode I (Sommer): 1. Juni bis 30. Juni<br>
+            Transferperiode II (Winter): 1. Januar bis 31. Januar<br>
+        </p>
+        <h3 class="font-bold leading-10 tracking-tight text-gray-500">Wechselperioden Jugend:</h3>
+        <p>
+            Sommer: 1. Juni bis 30. Juni
+        </p>
+
+        <hr class="mt-8">
+
+        <p class="mt-8">
+            Wir hoffen, dass diese Informationen Dir bei Deinem Vereinswechsel weiterhelfen. <br>Bei weiteren Fragen steht dir unser Trainer und Jugendleiter gerne zur Verfügung.
+        </p>
+
+        <h3 class="mt-10 font-bold leading-10 tracking-tight text-gray-900">Weitere Informationen zur Fußballabmeldung:</h3>
+
+        <p class="mt-2">
+            Hier sind einige nützliche Links, um mehr über die Fußballabmeldung zu erfahren:
+        </p>
+        <p class="mt-3 leading-9">
+            - <a href="https://www.fussball.de/newsdetail/vereinswechsel-das-musst-du-wissen/-/article-id/101459#!/" target="_blank" class="text-gray-500 underline">fussball.de: Vereinswechsel: Das musst du wissen!</a>
+            <br>
+            - <a href="https://wdfv.de/assets/addons/pdfout/vendor/web/viewer.html?file=/download/spielberechtigungen/abmeldung.pdf" target="_blank" class="text-gray-500 underline">Abmeldung - Info beim Westdeutschen Fußballverband</a>
+            <br>
+            - <a href="https://wdfv.de/assets/addons/pdfout/vendor/web/viewer.html?file=/download/wdfv-satzung-und-ordnungen/h-jugendspielordnung.pdf" target="_blank" class="text-gray-500 underline">Jugendspielordnung beim Westdeutschen Fußballverband</a>
+        </p>
+
+    </div>
+
+</Layout>
+
+<style>
+
+
+</style>

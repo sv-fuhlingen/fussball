@@ -37,6 +37,7 @@ const navigation = [
   {
     name: 'Mitgliedschaft', href: '#', current: false, data: [
       {name: 'Anmeldung', href: '/anmeldung'},
+      {name: 'Abmeldung', href: '/abmeldung'},
     ]
   },
 ]
